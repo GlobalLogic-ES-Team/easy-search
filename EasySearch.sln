@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.Domain", "EasySearch.Domain\EasySearch.Domain.csproj", "{4BDE1A00-C388-4D3A-8F5A-995C8312354B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.Indexer", "EasySearch.Indexer\EasySearch.Indexer.csproj", "{DE533835-9319-4253-8893-A8D72A91D2C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch", "ElasticSearch\ElasticSearch.csproj", "{AF790E9E-2B2F-4DB4-8703-6802E5402650}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE533835-9319-4253-8893-A8D72A91D2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE533835-9319-4253-8893-A8D72A91D2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE533835-9319-4253-8893-A8D72A91D2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE533835-9319-4253-8893-A8D72A91D2C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
