@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Web;
 
 namespace ElasticSearch
 {
-  public class Helper
+    public class Helper
   {
     private String ApiKey = "AIzaSyBoB7nh-_GdCKkiqMlz41AJ9XuLxQcwlmA";
     public Models.LocationDetail GetLocation(string lat, string lng)
@@ -32,6 +30,21 @@ namespace ElasticSearch
       }
       //Models.LocationDetail loc = (Models.LocationDetail)content);
     return  JObject.Parse(content).ToObject<Models.LocationDetail>();
+    }
+
+    public static string ToReadbileTime(long ticks)
+    {
+      int minutes = TimeSpan.FromTicks(ticks).Minutes;
+      int seconds = TimeSpan.FromTicks(ticks).Seconds;
+      int milliSeconds = TimeSpan.FromTicks(ticks).Milliseconds;
+
+      List<string> timeParts = new List<string>();
+
+      if (minutes > 0) timeParts.Add(String.Format("{0} minutes", minutes));
+      if (seconds > 0) timeParts.Add(String.Format("{0} seconds", seconds));
+      if (milliSeconds > 0) timeParts.Add(String.Format("{0} milliSeconds", milliSeconds));
+
+      return string.Join(" ", timeParts);
     }
   }
 }
