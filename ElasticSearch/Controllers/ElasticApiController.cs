@@ -54,7 +54,7 @@ namespace ElasticSearch.Controllers
       var search_result = searchResults.Documents.ToList();
 
       sw.Stop();
-      result.Performance.ElapsedTime = sw.ElapsedTicks;
+      result.Performance.ElapsedTime = Helper.ToReadbileTime(sw.ElapsedTicks);
       result.PostalCode = zip;
       result.Formatted_Address = String.Format("Searching {0} from ElasticSearch", result.PostalCode);
 
