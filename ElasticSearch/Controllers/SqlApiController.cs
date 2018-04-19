@@ -57,9 +57,11 @@ namespace ElasticSearch.Controllers
       System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
       sw.Start();
       Models.ConnectionString context = new Models.ConnectionString();
+      var people = context.People.Where(e => e.zip == zip).ToList<Models.Person>();
       sw.Stop();
       result.Performance.ElapsedTime = sw.ElapsedTicks;
-      return context.People.Where(e => e.zip == zip).ToList<Models.Person>();
+
+      return people;
     }
 
     [HttpPost]
