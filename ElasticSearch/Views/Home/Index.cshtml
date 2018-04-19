@@ -4,7 +4,7 @@
 
 <legend>Search</legend>
 
-<div style="margin-bottom:20px;" class="container">
+<div style="margin-bottom:10px;" class="container">
     <div class="col-md-3">
             <div class="input-group add-on">
                 <input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
@@ -13,12 +13,13 @@
                 </div>
             </div>
     </div>
+    <div class="col-md-4">Search with Elastic? &nbsp;<input type="checkbox" id="isElastic"/> </div>
+    <div class="col-md-5">
+        <label id="formatted_address"></label>
+        <div class="text-danger">Elapsed Time: <label id="elapsed_Time"></label></div>
+</div>
 </div>
 
-<legend>
-    <label id="formatted_address"></label>
-    <label id="elapsed_Time"></label>
-</legend>
 
 <div id="map"></div>
 
@@ -27,8 +28,16 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Mobile</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Salary</th>
         </tr>
     </thead>
 <tbody id="peoplelist"></tbody>
@@ -59,6 +68,14 @@
         <td>${id}</td>
         <td>${firstname}</td>
         <td>${lastname}</td>
+        <td>${gender}</td>
+        <td>${dob}</td>
+        <td>${cell}</td>
+        <td>${street}</td>
+        <td>${city}</td>
+        <td>${state}</td>
+        <td>${zip}</td>
+        <td>${salary}</td>
     </tr>
 </script>
 

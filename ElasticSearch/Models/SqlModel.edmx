@@ -18,13 +18,12 @@
           <Property Name="dob" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cell" Type="nchar" MaxLength="15" />
           <Property Name="salary" Type="float" />
-          <Property Name="interests" Type="nvarchar" MaxLength="200" />
+          <Property Name="interests" Type="nvarchar(max)" />
           <Property Name="json_data" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Description" Type="ntext" />
-          <Property Name="zip" Type="varchar" MaxLength="6" />
-          <Property Name="street" Type="nvarchar" MaxLength="50" />
-          <Property Name="city" Type="nchar" MaxLength="15" />
-          <Property Name="state" Type="nchar" MaxLength="15" />
+          <Property Name="street" Type="nvarchar" MaxLength="200" />
+          <Property Name="state" Type="nvarchar" MaxLength="200" />
+          <Property Name="city" Type="nvarchar" MaxLength="200" />
+          <Property Name="zip" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityContainer Name="PersonStoreContainer">
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -46,13 +45,12 @@
           <Property Name="dob" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cell" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="salary" Type="Double" />
-          <Property Name="interests" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="interests" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="json_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="zip" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="state" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="zip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="ConnectionString" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="People" EntityType="Self.Person" />
@@ -70,7 +68,6 @@
                 <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ssn" ColumnName="ssn" />
                 <ScalarProperty Name="gender" ColumnName="gender" />

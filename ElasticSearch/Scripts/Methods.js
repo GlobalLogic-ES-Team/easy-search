@@ -15,16 +15,21 @@ $(document).ajaxError(function () {
 var Methods = {
 
     Search: function () {
+        //debugger;
         var searchText = $("#srch-term").val();
+        var isElastic = $("#isElastic")[0].checked;
+
+        var url = "Api/SqlApi/GetbyZipcode";
+        if (isElastic)
+            url = "Api/ElasticApi/GetbyZipcode";
+
         $.ajax({
-            url: "Api/ElasticApi/GetbyZipcode",
+            url: url,
             data: { SearchString: searchText },
             type: "POST",
             dataType: 'json',
             success: function (result) {
                 try {
-                    alert('success');
-
                     $("#formatted_address").text(result.Formatted_Address);
                     $("#elapsed_Time").text(result.Performance.ElapsedTime);
 
@@ -43,14 +48,19 @@ var Methods = {
     },
 
     GetAddress: function (lat, lng) {
+
+        var isElastic = $("#isElastic")[0].checked;
+        var url = "Api/SqlApi/GetLocationDetail";
+        if (isElastic)
+            url = "Api/ElasticApi/GetLocationDetail";
+
         $.ajax({
-            url: "Api//ElasticApi/GetLocationDetail",
+            url: url,
             async: true,
             data: { Lat: lat, Lng: lng },
             type: 'POST',
             success: function (result) {
                 try {
-                    
                     $("#formatted_address").text(result.Formatted_Address);
                     $("#elapsed_Time").text(result.Performance.ElapsedTime);
 
@@ -65,8 +75,7 @@ var Methods = {
             error: function (ex) {
                 if (ex.status == 415)
                     alert(ex.responseText);
-                else
-                {
+                else {
                     alert('something went wrong');
                 }
             }

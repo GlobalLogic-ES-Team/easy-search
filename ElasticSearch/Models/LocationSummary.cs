@@ -19,6 +19,6 @@ namespace ElasticSearch.Models
 
   public class Performance
   {
-    public TimeSpan ElapsedTime { get; set; }
+    public long ElapsedTime { get; set; }
   }
 }

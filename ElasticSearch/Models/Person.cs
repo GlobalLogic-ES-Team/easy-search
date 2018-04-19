@@ -25,7 +25,6 @@ namespace ElasticSearch.Models
         public Nullable<double> salary { get; set; }
         public string interests { get; set; }
         public string json_data { get; set; }
-        public string Description { get; set; }
         public string zip { get; set; }
         public string street { get; set; }
         public string city { get; set; }

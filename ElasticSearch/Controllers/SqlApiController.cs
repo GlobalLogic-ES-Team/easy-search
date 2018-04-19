@@ -58,7 +58,7 @@ namespace ElasticSearch.Controllers
       sw.Start();
       Models.ConnectionString context = new Models.ConnectionString();
       sw.Stop();
-      result.Performance.ElapsedTime = sw.Elapsed;
+      result.Performance.ElapsedTime = sw.ElapsedTicks;
       return context.People.Where(e => e.zip == zip).ToList<Models.Person>();
     }
 
