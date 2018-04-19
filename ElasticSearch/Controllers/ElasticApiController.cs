@@ -60,5 +60,18 @@ namespace ElasticSearch.Controllers
 
       return Mapper.Map<List<PersonData>, List<Person>>(search_result);
     }
+
+    [HttpPost]
+    public HttpResponseMessage GetbyZipcode(JObject jsonData)
+    {
+        dynamic dyn = jsonData;
+        var searchString = dyn.SearchString.Value as string;
+
+        result.PostalCode = searchString;
+        result.People = GetByZip(result.PostalCode);
+        result.Formatted_Address = String.Format("Searching for zip code{0}", result.PostalCode);
+
+        return Request.CreateResponse(HttpStatusCode.OK, result);
+    }
   }
 }
