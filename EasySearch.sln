@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.Domain", "EasySearch.Domain\EasySearch.Domain.csproj", "{4BDE1A00-C388-4D3A-8F5A-995C8312354B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.Indexer", "EasySearch.Indexer\EasySearch.Indexer.csproj", "{DE533835-9319-4253-8893-A8D72A91D2C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch", "ElasticSearch\ElasticSearch.csproj", "{AF790E9E-2B2F-4DB4-8703-6802E5402650}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.DataImport", "EasySearch.DataImport\EasySearch.DataImport.csproj", "{9A6090B9-3543-4077-A060-7C5FDB409AFE}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EasySearch.SQLDB", "EasySearch.SQLDB\EasySearch.SQLDB.sqlproj", "{F7801AB5-C98E-490E-B8F5-00D526C73D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +31,21 @@ Global
 		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6090B9-3543-4077-A060-7C5FDB409AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6090B9-3543-4077-A060-7C5FDB409AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6090B9-3543-4077-A060-7C5FDB409AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6090B9-3543-4077-A060-7C5FDB409AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7801AB5-C98E-490E-B8F5-00D526C73D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7801AB5-C98E-490E-B8F5-00D526C73D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7801AB5-C98E-490E-B8F5-00D526C73D15}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F7801AB5-C98E-490E-B8F5-00D526C73D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7801AB5-C98E-490E-B8F5-00D526C73D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7801AB5-C98E-490E-B8F5-00D526C73D15}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B417A287-C7E2-404D-BF3B-65CB4F50C871}
 	EndGlobalSection
 EndGlobal
