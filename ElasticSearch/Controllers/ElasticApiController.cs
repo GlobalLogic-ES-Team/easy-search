@@ -1,4 +1,5 @@
-﻿using EasySearch.Domain;
+﻿using AutoMapper;
+using EasySearch.Domain;
 using ElasticSearch.Models;
 using Newtonsoft.Json.Linq;
 using System;
@@ -43,11 +44,11 @@ namespace ElasticSearch.Controllers
       System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
       sw.Start();
       var client = EasySearchConfiguration.GetClient();
-      var searchResults = client.Search<ElasticSearch.Models.Person>(s => s
+      var searchResults = client.Search<PersonData>(s => s
           .From(0)
-          .Size(100000)
+          .Size(10000)
           .Query(q => q
-               .Term(p => p.zip, zip)
+               .Term(p => p.postCode, zip)
           )
       );
       var search_result = searchResults.Documents.ToList();
@@ -56,7 +57,8 @@ namespace ElasticSearch.Controllers
       result.Performance.ElapsedTime = sw.ElapsedTicks;
       result.PostalCode = zip;
       result.Formatted_Address = String.Format("Searching {0} from ElasticSearch", result.PostalCode);
-      return search_result;
+
+      return Mapper.Map<List<PersonData>, List<Person>>(search_result);
     }
   }
 }

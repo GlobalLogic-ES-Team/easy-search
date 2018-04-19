@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EasySearchConfiguration.cs" />
-    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\PersonData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

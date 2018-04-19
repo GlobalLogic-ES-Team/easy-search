@@ -12,7 +12,7 @@ namespace EasySearch.Domain
         public static Uri CreateUri(int port)
         {
             var isFiddlerRunning = Process.GetProcessesByName("fiddler").Any();
-            var host = isFiddlerRunning ? "ipv4.fiddler" : "localhost";
+            var host = isFiddlerRunning ? "ipv4.fiddler" : "10.3.0.191";
 
             return new Uri("http://" + host + ":" + port);
         }
@@ -21,7 +21,7 @@ namespace EasySearch.Domain
         {
             _connectionSettings = new ConnectionSettings(CreateUri(9200))
                 .DefaultIndex("persondata")
-                .InferMappingFor<Person>(i => i
+                .InferMappingFor<PersonData>(i => i
                     .TypeName("personrecord")
                     .IndexName("persondata")
                 );
