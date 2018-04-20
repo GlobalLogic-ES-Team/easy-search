@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace POCDataImport
+namespace EasySearch.DataImport
 {
     public class ESConfigSection : ConfigurationSection
     {

@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 using Nest;
 using Elasticsearch.Net;
 
-namespace POCDataImport
+namespace EasySearch.DataImport
 {
     class Program
     {
@@ -23,7 +23,9 @@ namespace POCDataImport
 
         const int RecordCountInsert = 5000;
 
-        private static string urlParameters = string.Format("?nat=US&inc=name,gender,location,email,dob,cell,id&results={0}&format=pretty",RecordCountInsert);
+        static string apiParam = ConfigurationManager.AppSettings["RandomUserApiParams"];
+
+        static string urlParameters = string.Format(apiParam, RecordCountInsert);
 
         public static ElasticClient EsClient()
         {
@@ -67,6 +69,8 @@ namespace POCDataImport
 
         static void Main(string[] args)
         {
+            ESClusterConfiguration esClusterConfig = new ESClusterConfiguration();
+
             try
             {
                 #region This is for reading Salaries & Interests from a Sample Json 

@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.Domain", "EasySearch.Domain\EasySearch.Domain.csproj", "{4BDE1A00-C388-4D3A-8F5A-995C8312354B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.Indexer", "EasySearch.Indexer\EasySearch.Indexer.csproj", "{DE533835-9319-4253-8893-A8D72A91D2C1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch", "ElasticSearch\ElasticSearch.csproj", "{AF790E9E-2B2F-4DB4-8703-6802E5402650}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySearch.DataImport", "EasySearch.DataImport\EasySearch.DataImport.csproj", "{9A6090B9-3543-4077-A060-7C5FDB409AFE}"
@@ -23,10 +21,6 @@ Global
 		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BDE1A00-C388-4D3A-8F5A-995C8312354B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE533835-9319-4253-8893-A8D72A91D2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE533835-9319-4253-8893-A8D72A91D2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE533835-9319-4253-8893-A8D72A91D2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE533835-9319-4253-8893-A8D72A91D2C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF790E9E-2B2F-4DB4-8703-6802E5402650}.Release|Any CPU.ActiveCfg = Release|Any CPU
