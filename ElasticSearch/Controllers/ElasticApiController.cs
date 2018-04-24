@@ -5,25 +5,23 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web.Mvc;
 
 namespace ElasticSearch.Controllers
 {
-  public class ElasticApiController : ApiController
+  public class ElasticApiController : Controller
   {
     LocationSummary<ElasticSearch.Models.Person> result = new LocationSummary<ElasticSearch.Models.Person>();
 
     [HttpPost]
-    public HttpResponseMessage GetLocationDetail(JObject jsonData)
+    public JsonResult GetLocationDetail(String Lat, String Lng)
     {
-      dynamic dyn = jsonData;
-      var lat = dyn.Lat.Value as string;
-      var lng = dyn.Lng.Value as string;
+      //dynamic dyn = jsonData;
+      //var lat = dyn.Lat.Value as string;
+      //var lng = dyn.Lng.Value as string;
 
       Helper helper = new Helper();
-      LocationDetail location = helper.GetLocation(lat, lng);
+      LocationDetail location = helper.GetLocation(Lat, Lng);
 
       if (location != null && location.Results != null && location.Results.Count > 0)
       {
@@ -33,10 +31,13 @@ namespace ElasticSearch.Controllers
           result.PostalCode = loc.First().long_name;
       }
       else
-        return Request.CreateResponse(HttpStatusCode.UnsupportedMediaType, "Machli machli jal ki rani!");
+        throw new Exception("Machli machli jal ki rani!");
+      //Request.CreateResponse(HttpStatusCode.UnsupportedMediaType, "Machli machli jal ki rani!");
 
       result.People = GetByZip(result.PostalCode);
-      return Request.CreateResponse(HttpStatusCode.OK, result);
+      result.People = result.People.OrderBy(e => e.firstname).ToList();
+      return Json(result, JsonRequestBehavior.AllowGet);
+      //Request.CreateResponse(HttpStatusCode.OK, result);
     }
 
     private List<ElasticSearch.Models.Person> GetByZip(String zip)
@@ -56,22 +57,53 @@ namespace ElasticSearch.Controllers
       sw.Stop();
       result.Performance.ElapsedTime = Helper.ToReadbileTime(sw.ElapsedTicks);
       result.PostalCode = zip;
-      result.Formatted_Address = String.Format("Searching {0} from ElasticSearch", result.PostalCode);
 
       return Mapper.Map<List<PersonData>, List<Person>>(search_result);
     }
 
+    //[HttpPost]
+    //public JsonResult GetbyZipcode(JObject jsonData)
+    //{
+    //  dynamic dyn = jsonData;
+    //  var searchString = dyn.SearchString.Value as string;
+
+    //  result.PostalCode = searchString;
+    //  result.People = GetByZip(result.PostalCode);
+    //  result.Formatted_Address = String.Format("Searching for zip code{0}", result.PostalCode);
+
+    //  return Json(result, JsonRequestBehavior.AllowGet);
+    //}
+
+
     [HttpPost]
-    public HttpResponseMessage GetbyZipcode(JObject jsonData)
+    public JsonResult SearchText(String SearchString)
     {
-        dynamic dyn = jsonData;
-        var searchString = dyn.SearchString.Value as string;
+      //dynamic dyn = jsonData;
+      //var searchString = dyn.SearchString.Value as string;
 
-        result.PostalCode = searchString;
-        result.People = GetByZip(result.PostalCode);
-        result.Formatted_Address = String.Format("Searching for zip code{0}", result.PostalCode);
+      System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
 
-        return Request.CreateResponse(HttpStatusCode.OK, result);
+      sw.Start();
+      var client = EasySearchConfiguration.GetClient();
+      var searchResults = client.Search<PersonData>(s => s
+      .AllTypes()
+       .From(0)
+       .Take(10000)
+       .Query(qry => qry
+       .Bool(b => b
+       .Must(m => m
+       .QueryString(qs => qs
+       .DefaultField("_all")
+       .Query(SearchString))))));
+
+      var search_result = searchResults.Documents.ToList<PersonData>();
+
+      sw.Stop();
+      result.Performance.ElapsedTime = Helper.ToReadbileTime(sw.ElapsedTicks);
+
+      result.People = Mapper.Map<List<PersonData>, List<Person>>(search_result);
+      return Json(result, JsonRequestBehavior.AllowGet);
+      //Request.CreateResponse(HttpStatusCode.OK, result);
     }
   }
 }

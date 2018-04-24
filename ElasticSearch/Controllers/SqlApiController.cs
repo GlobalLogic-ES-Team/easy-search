@@ -1,40 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using Newtonsoft.Json.Linq;
 using ElasticSearch.Models;
+using System.Web.Mvc;
 
 namespace ElasticSearch.Controllers
 {
-  public class SqlApiController : ApiController
+  public class SqlApiController : Controller
   {
-
-    [HttpPost]
-    public void Search(JObject jsonData)
-    {
-      dynamic dyn = jsonData;
-      var searchString = dyn.SearchString.Value as string;
-
-
-      //Models.ConnectionString context = new Models.ConnectionString();
-      //var result = context.People.Where(e => e.Description.Contains(searchString)).ToList<Models.Person>();
-
-    }
     LocationSummary<Person> result = new LocationSummary<Person>();
 
     [HttpPost]
-    public HttpResponseMessage GetLocationDetail(JObject jsonData)
+    public JsonResult GetLocationDetail(String Lat, String Lng)
     {
-      dynamic dyn = jsonData;
-      var lat = dyn.Lat.Value as string;
-      var lng = dyn.Lng.Value as string;
+      //dynamic dyn = jsonData;
+      //var lat = dyn.Lat.Value as string;
+      //var lng = dyn.Lng.Value as string;
 
 
       Helper helper = new Helper();
-      LocationDetail location = helper.GetLocation(lat, lng);
+      LocationDetail location = helper.GetLocation(Lat, Lng);
 
       if (location != null && location.Results != null && location.Results.Count > 0)
       {
@@ -44,12 +30,13 @@ namespace ElasticSearch.Controllers
           result.PostalCode = loc.First().long_name;
       }
       else
-        return Request.CreateResponse(HttpStatusCode.UnsupportedMediaType, "Machli machli jal ki rani!");
+        throw new Exception("Machli machli jal ki rani!");
+      //Request.CreateResponse(HttpStatusCode.UnsupportedMediaType, "Machli machli jal ki rani!");
 
       result.People = GetByZip(result.PostalCode);
-
-
-      return Request.CreateResponse(HttpStatusCode.OK, result);
+      result.People = result.People.OrderBy(e => e.firstname).ToList();
+      return Json(result, JsonRequestBehavior.AllowGet);
+      // Request.CreateResponse(HttpStatusCode.OK, result);
     }
 
     private List<Person> GetByZip(String zip)
@@ -64,38 +51,37 @@ namespace ElasticSearch.Controllers
       return people;
     }
 
+    //[HttpPost]
+    //public HttpResponseMessage GetbyZipcode(JObject jsonData)
+    //{
+    //  dynamic dyn = jsonData;
+    //  var searchString = dyn.SearchString.Value as string;
+
+    //  result.PostalCode = searchString;
+    //  result.People = GetByZip(result.PostalCode);
+    //  result.Formatted_Address = String.Format("Searching for zip code{0}", result.PostalCode);
+
+    //  return Request.CreateResponse(HttpStatusCode.OK, result);
+    //}
+
     [HttpPost]
-    public HttpResponseMessage GetbyZipcode(JObject jsonData)
+    public JsonResult SearchText(String SearchString)
     {
-      dynamic dyn = jsonData;
-      var searchString = dyn.SearchString.Value as string;
+      //dynamic dyn = jsonData;
+      //var searchString = dyn.SearchString.Value as string;
 
-      result.PostalCode = searchString;
-      result.People = GetByZip(result.PostalCode);
-      result.Formatted_Address = String.Format("Searching for zip code{0}", result.PostalCode);
+      System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+      Models.ConnectionString context = new Models.ConnectionString();
 
-      return Request.CreateResponse(HttpStatusCode.OK, result);
+      sw.Start();
+      result.People = context.People.Where(e => e.json_data.Contains(SearchString)).ToList<Models.Person>();
+      sw.Stop();
+
+      result.Performance.ElapsedTime = Helper.ToReadbileTime(sw.ElapsedTicks);
+
+      return Json(result, JsonRequestBehavior.AllowGet);
+      //Request.CreateResponse(HttpStatusCode.OK, result);
     }
-
-    //[HttpPost]
-    //public void GetbyLastName(JObject jsonData)
-    //{
-    //  dynamic dyn = jsonData;
-    //  var searchString = dyn.SearchString.Value as string;
-
-    //  Models.ConnectionString context = new Models.ConnectionString();
-    //  var result = context.People.Where(e => e.lastname.Contains(searchString)).ToList<Models.Person>();
-    //}
-
-    //[HttpPost]
-    //public void GetbyGender(JObject jsonData)
-    //{
-    //  dynamic dyn = jsonData;
-    //  var searchString = dyn.SearchString.Value as string;
-
-    //  Models.ConnectionString context = new Models.ConnectionString();
-    //  var result = context.People.Where(e => e.gender == searchString).ToList<Models.Person>();
-    //}
 
   }
 }
