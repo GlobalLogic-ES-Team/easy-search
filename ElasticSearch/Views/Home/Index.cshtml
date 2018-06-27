@@ -2,8 +2,15 @@
   ViewBag.Title = "Map Search";
 }
 <div>
-    <h1>Map Search</h1>
-    <h4>Click on the map to search people records by zipcode.</h4>
+    <h3>Map Search</h3>
+    <div><b>Field Specific Search Capability - single column.</b></div>
+    There is two way to get list of people in a zip code. 
+    Left side of the result is from relational database and the right side of the resultset is from indexed ElasticSearch with their elapsed miliseconds in pulling those records.
+    <ul>
+        <li>Map click: The action will pull zip code from Google Map service and list down people.</li>
+        <li>Search by Textbox: You can manually provide zip code in textbox and click on search button to get the list.</li>
+    </ul>
+
 </div>
 
 <div class="col-md-8" id="map"></div>

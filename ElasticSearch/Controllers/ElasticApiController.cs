@@ -31,13 +31,17 @@ namespace ElasticSearch.Controllers
           result.PostalCode = loc.First().long_name;
       }
       else
-        throw new Exception("Machli machli jal ki rani!");
-      //Request.CreateResponse(HttpStatusCode.UnsupportedMediaType, "Machli machli jal ki rani!");
+        throw new Exception("Did you click Ocean? There is no zipcode.");
 
       result.People = GetByZip(result.PostalCode);
       result.People = result.People.OrderBy(e => e.firstname).ToList();
+
+      if (result != null && result.People != null)
+      {
+        result.Count = result.People.Count;
+      }
+
       return Json(result, JsonRequestBehavior.AllowGet);
-      //Request.CreateResponse(HttpStatusCode.OK, result);
     }
 
     private List<ElasticSearch.Models.Person> GetByZip(String zip)
@@ -61,18 +65,7 @@ namespace ElasticSearch.Controllers
       return Mapper.Map<List<PersonData>, List<Person>>(search_result);
     }
 
-    //[HttpPost]
-    //public JsonResult GetbyZipcode(JObject jsonData)
-    //{
-    //  dynamic dyn = jsonData;
-    //  var searchString = dyn.SearchString.Value as string;
-
-    //  result.PostalCode = searchString;
-    //  result.People = GetByZip(result.PostalCode);
-    //  result.Formatted_Address = String.Format("Searching for zip code{0}", result.PostalCode);
-
-    //  return Json(result, JsonRequestBehavior.AllowGet);
-    //}
+    
 
 
     [HttpPost]
@@ -102,6 +95,14 @@ namespace ElasticSearch.Controllers
       result.Performance.ElapsedTime = Helper.ToReadbileTime(sw.ElapsedTicks);
 
       result.People = Mapper.Map<List<PersonData>, List<Person>>(search_result);
+
+      if (result != null && result.People != null)
+      {
+        result.Count = result.People.Count;
+        if (result.Count > 1000)
+          result.People = null;
+      }
+
       return Json(result, JsonRequestBehavior.AllowGet);
       //Request.CreateResponse(HttpStatusCode.OK, result);
     }

@@ -1,24 +1,36 @@
 ﻿@section scripts{
     <script type="text/javascript">
-        $(document).ajaxStart(function () {
-            $("#processingBar").show();
-        });
+        //$(document).ajaxStart(function () {
+        //    $("#processingBar").show();
+        //});
 
-        $(document).ajaxStop(function () {
-            $("#processingBar").hide();
-        });
+        //$(document).ajaxStop(function () {
+        //    $("#processingBar").hide();
+        //});
 
-        $(document).ajaxError(function () {
-            $("#processingBar").hide();
-        });
+        //$(document).ajaxError(function () {
+        //    $("#processingBar").hide();
+        //});
     </script>
 }
 
 
-<div>
-    <h1>Text Search</h1>
-    <h4>Try with random name, street, city, state, zip, cell, gender.</h4>
-</div>
+    <div>
+        <h3>Text Search</h3>
+        <div><b>Full-Text Search Capability - across multiple columns.</b></div>
+        <div>
+            This screen is showing full text search capability from relational database, ElasticSearch and their performance numbers.
+            You can try searching people for with their name, street, city, state, zip, cell, gender.
+            Here, we are using single xml column from SQL which has details stored in xml format and are using 'LIKE' command to search for text.
+            while ElasticSearch is using full indexed data and searching on all columns/fields.
+        </div>
+        <div>
+            <i>Some of the common keywords are - peter, john, catherine etc. </i>
+            <div>SQL can time out after 50 seconds of execution on over 1m records. You should increase connection timeout in web.config to increase timeout duration to get resultset.</div>
+        </div><div>
+            Left side of the result is from relational database and the right side of the resultset is from indexed ElasticSearch with their elapsed miliseconds in pulling those records.
+        </div>
+    </div>
 
 <div style="margin-bottom:10px;" class="container">
     <div class="col-md-3">
@@ -38,7 +50,7 @@
         </div>
         <div class="panel-body">
             <div class="text-danger">Elapsed Time: <label id="elapsed_Time_sql"></label></div>
-            <div >Records Found: <label id="count_sql"></label></div>
+            <div>Records Found: <label id="count_sql"></label></div>
             <div class="text-danger"><label id="err_sql"></label></div>
             <table class="table table-striped table-hover">
                 <thead>

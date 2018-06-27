@@ -1,8 +1,6 @@
-﻿
-var Methods = {
+﻿var Methods = {
 
     Search: function () {
-
 
         var searchText = $("#srch-term").val();
 
@@ -13,8 +11,8 @@ var Methods = {
         $("#count_sql").text("");
         $("#count_es").text("");
 
-        $("#title_sql").text("Sql");
-        $("#title_es").text("ElasticSearch");
+        $("#title_sql").text("Sql: Still Searching...");
+        $("#title_es").text("ElasticSearch: Still Searching...");
         
 
         $.ajax({
@@ -35,6 +33,7 @@ var Methods = {
                 }
             },
             error: function (ex) {
+                $("#title_sql").text("Sql: Error Occured!");
                 $("err_sql").text(ex.statusText)
             }
         });
@@ -50,7 +49,7 @@ var Methods = {
                     //$("#formatted_address").text(result.Formatted_Address);
                     $("#elapsed_Time_es").text(result.Performance.ElapsedTime);
                     $("#peoplelist-template").tmpl(result.People).appendTo("#peoplelist_es");
-                    $("#count_es").text(result.People.length);
+                    $("#count_es").text(result.Count);
                     $("#title_es").text("ElasticSearch - SearchResult for Text: " + searchText);
                 }
                 catch (ex) {
@@ -107,7 +106,7 @@ var Methods = {
                     $("#formatted_address").text(result.Formatted_Address);
                     $("#elapsed_Time_es").text(result.Performance.ElapsedTime);
                     $("#peoplelist-template").tmpl(result.People).appendTo("#peoplelist_es");
-                    $("#count_es").text(result.People.length);
+                    $("#count_es").text(result.Count);
                     $("#title_es").text("ElasticSearch- : " + result.Formatted_Address);
                 }
                 catch (ex) {
