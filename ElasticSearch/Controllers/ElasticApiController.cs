@@ -87,7 +87,7 @@ namespace ElasticSearch.Controllers
        .Must(m => m
        .QueryString(qs => qs
        .DefaultField("_all")
-       .Query(SearchString))))));
+       .Query(String.Format("*{0}*", SearchString)))))));
 
       var search_result = searchResults.Documents.ToList<PersonData>();
 
